@@ -1,0 +1,45 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Debug & coverage
+coverage/
+*.lcov
+
+# Build files
+dist/
+build/
+
+# PM2 logs
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# MongoDB data (if stored locally)
+data/
+dump/
+
+# IDEs
+.vscode/
+.idea/
+
+# Optional: ignore uploads or temporary files
+uploads/
+tmp/
+temp/
