@@ -48,4 +48,30 @@ userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
+/**
+ * Mongoose custom hook to generate access token using JWT
+ *
+ * @returns {string} - token
+ */
+userSchema.methods.generateAccessToken = function () {
+  return jwt.sign(
+    { _id: this._id, username: this.username, email: this.email },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+    }
+  );
+};
+
+/**
+ * Mongoose custom hook to generate refresh token using JWT
+ *
+ * @returns {string} - token
+ */
+userSchema.methods.generateRefreshToken = function () {
+  return jwt.sign({ _id: this._id }, process.env.REFRESH_TOKEN_SECRET, {
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+  });
+};
+
 export const User = mongoose.model("User", userSchema);
