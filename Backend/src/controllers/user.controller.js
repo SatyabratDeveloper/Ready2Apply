@@ -1,5 +1,5 @@
-import { User } from "../models/user.model";
-import { ApiError, ApiResponse } from "../utils";
+import { User } from "../models/user.model.js";
+import { ApiError, ApiResponse } from "../utils/index.js";
 
 const options = {
   httpOnly: true,
