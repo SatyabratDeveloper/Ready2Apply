@@ -16,7 +16,7 @@ import {
   Profile,
   ReportAnalysis,
   Signup,
-} from "./pages/index.js";
+} from "./pages";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
