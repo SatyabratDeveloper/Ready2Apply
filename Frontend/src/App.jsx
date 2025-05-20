@@ -1,8 +1,10 @@
+import { Outlet } from "react-router-dom";
+
 function App() {
   return (
-    <>
-      <div className="text-2xl text-white bg-amber-600">Ready2Apply</div>
-    </>
+    <div className="">
+      <Outlet />
+    </div>
   );
 }
 
