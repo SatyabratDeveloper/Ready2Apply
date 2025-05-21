@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const Button = ({ label, type, navigateTo, style }) => {
+const Button = ({ label, type = "secondary", navigateTo = "", style = "" }) => {
   const navigate = useNavigate();
 
   return (
