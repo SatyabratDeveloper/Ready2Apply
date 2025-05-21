@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Button } from "../../components";
 
 const Header = () => {
   return (
@@ -11,18 +12,18 @@ const Header = () => {
         </Link>
       </div>
       <nav className="space-x-3 flex items-center">
-        <Link
-          to="/login"
-          className="md:px-5 px-3 md:py-2 py-1 rounded-full font-semibold text-blue-600 border border-blue-600 bg-white shadow-sm hover:bg-blue-50 transition-colors duration-200"
-        >
-          Login
-        </Link>
-        <Link
-          to="/signup"
-          className="px-5 py-2 hidden sm:inline-block  rounded-full font-semibold text-white border border-blue-600 bg-blue-600 shadow-md hover:bg-blue-700 transition-colors duration-200"
-        >
-          Get Started
-        </Link>
+        <Button
+          label="Login"
+          type="secondary"
+          navigateTo="/login"
+          style="md:px-5 px-3 md:py-2 py-1 md:text-md text-sm"
+        />
+        <Button
+          label="Get Started"
+          type="primary"
+          navigateTo="/signup"
+          style={"px-5 py-2 md:text-md text-sm hidden sm:inline-block"}
+        />
       </nav>
     </header>
   );
