@@ -4,14 +4,14 @@
 
 ## 🔧 Tech Stack
 
-- **Frontend**: React.js, Redux Toolkit, Tailwind CSS
+- **Frontend**: React.js, Context API, Tailwind CSS
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB
 - **Authentication**: JWT, bcrypt
 
 ## ✨ Features
 
-- User authentication (Login/Signup)
+- User authentication (Login/Sighup)
 - Resume upload and job description input
 - AI-based resume scoring and improvement suggestions
 - Clean and responsive user interface

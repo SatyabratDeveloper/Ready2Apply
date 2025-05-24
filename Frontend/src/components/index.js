@@ -2,5 +2,7 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import Button from "./button/Button";
 import Input from "./Input/Input";
+import ErrorMessage from "./ErrorMessage/ErrorMessage";
+import Loader from "./Loader/Loader";
 
-export { Header, Footer, Button, Input };
+export { Header, Footer, Button, Input, ErrorMessage, Loader };

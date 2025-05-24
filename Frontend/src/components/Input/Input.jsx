@@ -1,7 +1,6 @@
 const Input = ({
   type = "text",
   label,
-  id,
   name,
   required = false,
   value,
@@ -14,7 +13,7 @@ const Input = ({
       </label>
       <input
         type={type}
-        id={id}
+        id={name}
         name={name}
         required={required}
         value={value}
