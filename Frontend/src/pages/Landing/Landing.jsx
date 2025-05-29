@@ -1,6 +1,17 @@
 import { Button } from "../../components";
+import { useContext, useEffect } from "react";
+import UserContext from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // If user exists navigate to dashboard
+    if (user) navigate("/dashboard");
+  }, [user, navigate]);
+
   return (
     <div className="flex-grow flex flex-col items-center justify-center text-gray-900 sm:px-10 px-5">
       <div className="flex flex-col items-center justify-center text-center gap-5">

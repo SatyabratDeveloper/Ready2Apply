@@ -54,7 +54,23 @@ const generateReview = async (resumeFile, jobTitle, jobDescription) => {
     * **Skills:** What specific skills should be added or elaborated upon, and how can they be demonstrated?
     * **Quantifiable Achievements:** Advise on incorporating metrics and quantifiable results where applicable.
     * **Formatting/Structure (if applicable):** Briefly suggest any structural changes that could improve readability or impact.
-* Prioritize suggestions that will have the most significant impact on improving the match.`;
+* Prioritize suggestions that will have the most significant impact on improving the match.
+
+---
+
+✳️ IMPORTANT:
+
+Return your response strictly in **JSON format** using this structure:
+
+{
+  "summary": "Short intro summary here",
+  "score": 0-100,
+  "matches": ["...", "..."],
+  "gaps": ["...", "..."],
+  "suggestions": ["...", "..."]
+}
+
+⚠️ Do NOT include markdown formatting, code blocks, headings, or any extra text. Only return raw, valid JSON. No explanation.`;
 
   const contents = [
     {
@@ -73,7 +89,6 @@ const generateReview = async (resumeFile, jobTitle, jobDescription) => {
     contents: contents,
   });
 
-  console.log(response.text);
   return response.text;
 };
 
