@@ -6,70 +6,6 @@ const options = {
   secure: true,
 };
 
-const registerUser = async (req, res, next) => {
-  try {
-    // get user data from frontend
-    const { username, email, password } = req.body;
-
-    // validation
-    if ([username, email, password].some((field) => field.trim() === "")) {
-      throw new ApiError(400, "All field are required.");
-    }
-
-    // check if user is already exists
-    const existedUser = await User.findOne({ email });
-    if (existedUser) {
-      throw new ApiError(409, "User with this email already exists.");
-    }
-
-    // create user object in db - create entry in db
-    const user = await User.create({
-      username: username.toLowerCase(),
-      email,
-      password,
-    });
-
-    // check if user is created in db and remove password and refresh token field from response
-    const createdUser = await User.findById(user._id).select("-password");
-
-    if (!createdUser) {
-      throw new ApiError(
-        500,
-        "Something went wrong while registering the user"
-      );
-    }
-
-    // if db created successfully, return response
-    return res
-      .status(200)
-      .json(new ApiResponse(200, createdUser, "User registered successfully."));
-  } catch (error) {
-    next(error);
-  }
-};
-
-const generateAccessAndRefreshToken = async (userId) => {
-  try {
-    // find the user by its id
-    const user = await User.findById(userId);
-
-    // generate access and refresh token
-    const accessToken = user.generateAccessToken();
-    const refreshToken = user.generateRefreshToken();
-
-    // save the refreshToken to DB
-    user.refreshToken = refreshToken;
-    await user.save({ validateBeforeSave: false });
-
-    return { accessToken, refreshToken };
-  } catch (error) {
-    throw new ApiError(
-      500,
-      "Something went wrong, while generating access and refresh token."
-    );
-  }
-};
-
 const loginUser = async (req, res, next) => {
   try {
     // get the user data from frontend
@@ -115,6 +51,68 @@ const loginUser = async (req, res, next) => {
       );
   } catch (error) {
     next(error);
+  }
+};
+
+const registerUser = async (req, res, next) => {
+  try {
+    // get user data from frontend
+    const { username, email, password } = req.body;
+
+    // validation
+    if ([username, email, password].some((field) => field.trim() === "")) {
+      throw new ApiError(400, "All field are required.");
+    }
+
+    // check if user is already exists
+    const existedUser = await User.findOne({ email });
+    if (existedUser) {
+      throw new ApiError(409, "User with this email already exists.");
+    }
+
+    // create user object in db - create entry in db
+    const user = await User.create({
+      username: username.toLowerCase(),
+      email,
+      password,
+    });
+
+    // check if user is created in db and remove password and refresh token field from response
+    const createdUser = await User.findById(user._id).select("-password");
+
+    if (!createdUser) {
+      throw new ApiError(
+        500,
+        "Something went wrong while registering the user"
+      );
+    }
+
+    // if db created successfully, login user
+    return loginUser(req, res, next);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const generateAccessAndRefreshToken = async (userId) => {
+  try {
+    // find the user by its id
+    const user = await User.findById(userId);
+
+    // generate access and refresh token
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefreshToken();
+
+    // save the refreshToken to DB
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
+
+    return { accessToken, refreshToken };
+  } catch (error) {
+    throw new ApiError(
+      500,
+      "Something went wrong, while generating access and refresh token."
+    );
   }
 };
 
