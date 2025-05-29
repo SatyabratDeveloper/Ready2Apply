@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+import { ProtectedRoute } from "./components/index.js";
 import {
   Route,
   RouterProvider,
@@ -24,10 +25,38 @@ const router = createBrowserRouter(
       <Route path="" element={<Landing />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
-      <Route path="dashboard" element={<Dashboard />} />
-      <Route path="about" element={<About />} />
-      <Route path="profile" element={<Profile />} />
-      <Route path="report-analysis" element={<ReportAnalysis />} />
+      <Route
+        path="dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="about"
+        element={
+          <ProtectedRoute>
+            <About />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="report-analysis"
+        element={
+          <ProtectedRoute>
+            <ReportAnalysis />
+          </ProtectedRoute>
+        }
+      />
     </Route>
   )
 );

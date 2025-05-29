@@ -43,7 +43,7 @@ const Signup = () => {
         withCredentials: true,
       });
 
-      const { username, email } = response?.data?.data || {};
+      const { username, email } = response?.data?.data.user || {};
 
       // set user in global context
       setUser({ username, email });
